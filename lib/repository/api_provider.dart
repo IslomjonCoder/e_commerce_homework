@@ -168,11 +168,10 @@ class ApiProvider {
 
   Future<UniversalResponse> getProductsByCategories(
       {String category = 'jewelery'}) async {
-    String url = 'https://fakestoreapi.com/products/category/jewelery';
+    String url = 'https://fakestoreapi.com/products/category/$category';
     try {
       final response = await dio.get(url);
       if (response.statusCode == 200) {
-        print(response.data);
         return UniversalResponse(
             data: (response.data as List)
                 .map((e) => ProductModel.fromJson(e))

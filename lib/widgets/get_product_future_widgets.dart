@@ -1,5 +1,6 @@
 import 'package:e_commerce_homework/models/product/product_model.dart';
 import 'package:e_commerce_homework/repository/product_repository.dart';
+import 'package:e_commerce_homework/ui/detail_screen.dart';
 import 'package:e_commerce_homework/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -41,9 +42,18 @@ class _CustomFutureState extends State<CustomFuture> {
                   crossAxisCount: 2),
               itemBuilder: (context, index) {
                 final product = products[index];
-                return ProductWidget(
-                  product: product,
-                  isSelected: savedProducts.contains(product.id),
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(product: product),
+                        ));
+                  },
+                  child: ProductWidget(
+                    product: product,
+                    isSelected: savedProducts.contains(product.id),
+                  ),
                 );
               },
             );
