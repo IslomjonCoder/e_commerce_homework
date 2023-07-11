@@ -5,7 +5,7 @@ part 'product_model.g.dart';
 @HiveType(typeId: 1)
 class ProductModel {
   @HiveField(0)
-  int id;
+  int? id;
   @HiveField(1)
   String title;
   @HiveField(2)
@@ -17,16 +17,16 @@ class ProductModel {
   @HiveField(5)
   String image;
   @HiveField(6)
-  RatingModel rating;
+  RatingModel? rating;
 
   ProductModel({
-    required this.id,
+    this.id,
     required this.title,
     required this.price,
     required this.description,
     required this.category,
     required this.image,
-    required this.rating,
+    this.rating,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(

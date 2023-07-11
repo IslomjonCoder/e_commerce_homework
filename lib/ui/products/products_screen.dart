@@ -23,6 +23,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   List categories = [];
   late Future path;
   int selected = 0;
+  bool sorted = false;
 
   @override
   void initState() {
@@ -36,7 +37,19 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Products'),
-          actions: [IconButton(onPressed: () {}, icon: Icon(sort))],
+          actions: [
+            IconButton(
+                isSelected: sorted,
+                onPressed: () {
+                  path = sorted
+                      ? ProductRepository(apiProvider: provider).sortProducts()
+                      : ProductRepository(apiProvider: provider)
+                          .getAllProducts();
+                  sorted = !sorted;
+                  setState(() {});
+                },
+                icon: Icon(Icons.sort))
+          ],
         ),
         body: Column(
           children: [

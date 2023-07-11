@@ -2,8 +2,10 @@ import 'package:e_commerce_homework/repository/api_provider.dart';
 import 'package:e_commerce_homework/repository/category_repository.dart';
 import 'package:e_commerce_homework/repository/product_repository.dart';
 import 'package:e_commerce_homework/repository/user_repository.dart';
-import 'package:e_commerce_homework/ui/favourites_screen.dart';
-import 'package:e_commerce_homework/ui/products_screen.dart';
+import 'package:e_commerce_homework/ui/add/add_screen.dart';
+import 'package:e_commerce_homework/ui/favourites/favourites_screen.dart';
+import 'package:e_commerce_homework/ui/products/products_screen.dart';
+import 'package:e_commerce_homework/ui/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,7 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ProductsScreen(
           productRepository: productRepository,
           categoryRepository: await categoryRepository.getAllCategories()),
-      FavouritesScreen()
+      AddScreen(),
+      FavouritesScreen(),
     ]);
     setState(() {});
   }
@@ -57,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.shopping_cart), label: 'Products'),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.favorite), label: 'Favourites'),
           ]),

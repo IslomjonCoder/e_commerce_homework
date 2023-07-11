@@ -137,10 +137,12 @@ class ApiProvider {
 
   //------------------------------Login provider--------------------------------
 
-  Future<UniversalResponse> loginUser(UserModel user) async {
+  Future<UniversalResponse> loginUser(
+      {required String username, required String password}) async {
     String url = 'https://fakestoreapi.com/auth/login';
     try {
-      final response = await dio.post(url, data: user.toJson());
+      final response = await dio
+          .post(url, data: {"username": username, "password": password});
       if (response.statusCode == 200) {
         return UniversalResponse(data: TokenModel.fromJson(response.data));
       }

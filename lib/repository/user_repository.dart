@@ -17,8 +17,10 @@ class UserRepository {
     return null;
   }
 
-  Future<TokenModel?> loginUser({required UserModel user}) async {
-    UniversalResponse response = await apiProvider.loginUser(user);
+  Future<TokenModel?> loginUser(
+      {required String username, required String password}) async {
+    UniversalResponse response =
+        await apiProvider.loginUser(password: password, username: username);
     if (response.error.isEmpty) {
       return response.data as TokenModel;
     }

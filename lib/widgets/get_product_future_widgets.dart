@@ -1,6 +1,6 @@
 import 'package:e_commerce_homework/models/product/product_model.dart';
 import 'package:e_commerce_homework/repository/product_repository.dart';
-import 'package:e_commerce_homework/ui/detail_screen.dart';
+import 'package:e_commerce_homework/ui/detail/detail_screen.dart';
 import 'package:e_commerce_homework/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
