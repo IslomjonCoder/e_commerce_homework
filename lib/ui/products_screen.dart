@@ -7,29 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductsScreen extends StatefulWidget {
-  ProductsScreen({Key? key}) : super(key: key);
-
+  ProductsScreen(
+      {Key? key,
+      required this.productRepository,
+      required this.categoryRepository})
+      : super(key: key);
+  final ProductRepository productRepository;
+  final List categoryRepository;
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
   ApiProvider provider = ApiProvider();
-  List categories = ['All'];
+  List categories = [];
   late Future path;
   int selected = 0;
 
   @override
   void initState() {
     path = ProductRepository(apiProvider: provider).getAllProducts();
-    getCategories();
+    categories = ['All', ...widget.categoryRepository];
     super.initState();
-  }
-
-  getCategories() async {
-    categories.addAll(
-        await CategoryRepository(apiProvider: provider).getAllCategories());
-    setState(() {});
   }
 
   @override
@@ -37,6 +36,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Products'),
+          actions: [IconButton(onPressed: () {}, icon: Icon(sort))],
         ),
         body: Column(
           children: [
