@@ -47,6 +47,5 @@ class ProductWidget extends StatelessWidget {
         )
       ],
     );
-    ;
   }
 }

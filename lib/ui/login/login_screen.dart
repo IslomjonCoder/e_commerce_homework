@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                               .loginUser(
                                   username: controller1.text,
                                   password: controller2.text);
-                      (TokenModel == null)
+                      (result == null)
                           ? ScaffoldMessenger(
                               child: SnackBar(
                                   content: Text('Authorization is failed')))

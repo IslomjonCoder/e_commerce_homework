@@ -17,14 +17,20 @@ class AddScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add product'),
-        actions: [IconButton(onPressed: () {
-          ProductRepository(apiProvider: ApiProvider()).addProduct(
-              product: ProductModel(title: name.text,
-                price: double.parse(priceController.text),
-                description: description.text,
-                category: '',
-                image: 'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-math-90946.jpg&fm=jpg',))
-        }, icon: Icon(Icons.done))
+        actions: [
+          IconButton(
+              onPressed: () {
+                ProductRepository(apiProvider: ApiProvider()).addProduct(
+                    product: ProductModel(
+                  title: name.text,
+                  price: double.parse(priceController.text),
+                  description: description.text,
+                  category: '',
+                  image:
+                      'https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-math-90946.jpg&fm=jpg',
+                ));
+              },
+              icon: Icon(Icons.done))
         ],
       ),
       body: Padding(
@@ -32,9 +38,7 @@ class AddScreen extends StatelessWidget {
         child: Column(
           children: [
             UniversalInput(
-                label: 'Name',
-                hint: 'Enter product name',
-                controller: name),
+                label: 'Name', hint: 'Enter product name', controller: name),
             UniversalInput(
                 label: 'Price',
                 hint: 'Enter product price',

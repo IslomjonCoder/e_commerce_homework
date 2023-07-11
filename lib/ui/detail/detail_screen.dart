@@ -40,7 +40,7 @@ class DetailScreen extends StatelessWidget {
                         children: [
                           RatingBar.builder(
                             itemSize: 20,
-                            initialRating: product.rating.rate,
+                            initialRating: product.rating!.rate,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
@@ -54,13 +54,13 @@ class DetailScreen extends StatelessWidget {
                             onRatingUpdate: (rating) {},
                           ),
                           Text(
-                            product.rating.rate.toString(),
+                            product.rating!.rate.toString(),
                             style: AppTextStyles.regularBody1,
                           )
                         ],
                       ),
                       Text(
-                        product.rating.count.toString() + ' ordered',
+                        product.rating!.count.toString() + ' ordered',
                         style: AppTextStyles.regularBody1,
                       )
                     ],
