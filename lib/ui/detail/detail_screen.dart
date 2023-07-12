@@ -1,4 +1,8 @@
 import 'package:e_commerce_homework/models/product/product_model.dart';
+import 'package:e_commerce_homework/repository/api_provider.dart';
+import 'package:e_commerce_homework/repository/product_repository.dart';
+import 'package:e_commerce_homework/ui/edit/edit_screen.dart';
+import 'package:e_commerce_homework/ui/home/home_screen.dart';
 import 'package:e_commerce_homework/utils/colors.dart';
 import 'package:e_commerce_homework/utils/style.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +20,38 @@ class DetailScreen extends StatelessWidget {
         title: Text(
           product.title,
           style: AppTextStyles.mediumBody1.copyWith(color: Colors.white),
+          overflow: TextOverflow.ellipsis,
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditScreen(product: product),
+                    ));
+              },
+              icon: Icon(Icons.edit)),
+          IconButton(
+              onPressed: () async {
+                final result =
+                    await ProductRepository(apiProvider: ApiProvider())
+                        .deleteProduct(product: product);
+                if (result == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Product is not deleted')));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Product succesfully deleted')));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeScreen(),
+                      ));
+                }
+              },
+              icon: Icon(Icons.delete)),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -41,6 +76,7 @@ class DetailScreen extends StatelessWidget {
                           RatingBar.builder(
                             itemSize: 20,
                             initialRating: product.rating!.rate,
+                            // initialRating: 3,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
@@ -54,13 +90,14 @@ class DetailScreen extends StatelessWidget {
                             onRatingUpdate: (rating) {},
                           ),
                           Text(
+                            // product.rating!.rate.toString(),
                             product.rating!.rate.toString(),
                             style: AppTextStyles.regularBody1,
                           )
                         ],
                       ),
                       Text(
-                        product.rating!.count.toString() + ' ordered',
+                        "${product.rating?.count}" + ' ordered',
                         style: AppTextStyles.regularBody1,
                       )
                     ],

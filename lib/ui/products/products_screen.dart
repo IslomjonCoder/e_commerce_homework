@@ -35,6 +35,15 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: Drawer(
+            child: ListView(
+          children: [
+            ListTile(
+              title: Text('Users'),
+              leading: Icon(Icons.supervised_user_circle),
+            )
+          ],
+        )),
         appBar: AppBar(
           title: Text('Products'),
           actions: [

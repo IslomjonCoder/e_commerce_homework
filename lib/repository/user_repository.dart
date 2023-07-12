@@ -21,6 +21,7 @@ class UserRepository {
       {required String username, required String password}) async {
     UniversalResponse response =
         await apiProvider.loginUser(password: password, username: username);
+    print(response.error.isEmpty);
     if (response.error.isEmpty) {
       return response.data as TokenModel;
     }

@@ -30,13 +30,15 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-      id: json["id"],
-      title: json["title"] ?? '',
-      price: json["price"]?.toDouble() ?? 0.0,
-      description: json["description"] ?? '',
-      category: json["category"] ?? '',
-      image: json["image"] ?? '',
-      rating: RatingModel.fromJson(json["rating"]));
+        id: json["id"],
+        title: json["title"] ?? '',
+        price: json["price"]?.toDouble() ?? 0.0,
+        description: json["description"] ?? '',
+        category: json["category"] ?? '',
+        image: json["image"] ?? '',
+        rating: RatingModel.fromJson(json["rating"]) ??
+            RatingModel(count: 0, rate: 0.0),
+      );
 
   Map<String, dynamic> toJson() => {
         "title": title,
@@ -45,4 +47,9 @@ class ProductModel {
         "category": category,
         "image": image,
       };
+  @override
+  String toString() {
+    return "$title, $price,$description";
+    return super.toString();
+  }
 }

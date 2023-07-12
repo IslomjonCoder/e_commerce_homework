@@ -36,9 +36,11 @@ class ProductRepository {
 
   Future<ProductModel?> addProduct({required ProductModel product}) async {
     UniversalResponse response = await apiProvider.addProduct(product);
+    print(response.error);
     if (response.error.isEmpty) {
       return response.data as ProductModel;
     }
+
     return null;
   }
 

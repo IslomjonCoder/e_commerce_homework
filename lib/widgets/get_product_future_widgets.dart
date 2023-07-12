@@ -42,6 +42,7 @@ class _CustomFutureState extends State<CustomFuture> {
                   crossAxisCount: 2),
               itemBuilder: (context, index) {
                 final product = products[index];
+                print(product.rating);
                 return InkWell(
                   onTap: () {
                     Navigator.push(

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:e_commerce_homework/models/product/product_model.dart';
 import 'package:e_commerce_homework/models/token/token_model.dart';
@@ -65,6 +67,9 @@ class ApiProvider {
     try {
       final response = await dio.post(url, data: product.toJson());
       if (response.statusCode == 200) {
+        print(response.data);
+        print(ProductModel.fromJson(response.data));
+
         return UniversalResponse(data: ProductModel.fromJson(response.data));
       }
       return UniversalResponse(error: 'Error: Status code not equal to 200');
@@ -140,9 +145,12 @@ class ApiProvider {
   Future<UniversalResponse> loginUser(
       {required String username, required String password}) async {
     String url = 'https://fakestoreapi.com/auth/login';
+    print('ok1');
     try {
+      print('ok2');
       final response = await dio
           .post(url, data: {"username": username, "password": password});
+      print('ok3');
       if (response.statusCode == 200) {
         return UniversalResponse(data: TokenModel.fromJson(response.data));
       }

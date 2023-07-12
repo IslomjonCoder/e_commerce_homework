@@ -8,8 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  TextEditingController controller1 = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller1 = TextEditingController(text: 'donero');
+  TextEditingController controller2 = TextEditingController(text: 'ewedon');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget {
                 controller: controller2,
                 label: 'Password',
                 hint: 'Enter your Password',
-                isSecure: true,
+                // isSecure: true,
               ),
               SizedBox(height: 32),
               Container(
@@ -67,10 +67,14 @@ class LoginScreen extends StatelessWidget {
                               .loginUser(
                                   username: controller1.text,
                                   password: controller2.text);
+                      print(result);
                       (result == null)
-                          ? ScaffoldMessenger(
-                              child: SnackBar(
-                                  content: Text('Authorization is failed')))
+                          ? {
+                              Navigator.pop(context),
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text('Authorization is failed')))
+                            }
                           : {
                               Navigator.pop(context),
                               Navigator.pushReplacement(

@@ -7,7 +7,8 @@ class UniversalInput extends StatefulWidget {
       required this.label,
       required this.hint,
       this.isSecure,
-      this.maxLine,
+      this.maxLine = 1,
+      this.keyboardType = TextInputType.name,
       required this.controller})
       : super(key: key);
   String label;
@@ -15,6 +16,7 @@ class UniversalInput extends StatefulWidget {
   bool? isSecure;
   TextEditingController controller;
   int? maxLine;
+  TextInputType keyboardType;
 
   @override
   State<UniversalInput> createState() => _UniversalInputState();
@@ -35,6 +37,8 @@ class _UniversalInputState extends State<UniversalInput> {
         ),
         SizedBox(height: 12),
         TextField(
+          keyboardType: widget.keyboardType,
+          controller: widget.controller,
           maxLines: widget.maxLine,
           obscureText: widget.isSecure ?? false,
           style: GoogleFonts.poppins(
